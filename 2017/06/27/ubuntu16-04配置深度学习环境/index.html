@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>ubuntu16.04配置深度学习环境 | Dawnstar8411</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="帝都仰望星空大学">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ubuntu16.04配置深度学习环境 | Dawnstar8411">
+    <meta name="twitter:description" content="帝都仰望星空大学">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ubuntu16.04配置深度学习环境 | Dawnstar8411">
+    <meta property="og:description" content="帝都仰望星空大学">
+
+    
+    <meta name="author" content="Dawnstar8411">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="https://dawnstar8411.com/2017/06/27/ubuntu16-04配置深度学习环境/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-rain.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Dawnstar8411 的主页"><img src="/images/avatar.jpg" width="80" alt="Dawnstar8411 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Dawnstar8411">Dawnstar8411</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">不念过去  不畏将来</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">帝都仰望星空大学</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">读书&amp;观影</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/Dawnstar8411" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-06-27T09:38:24.000Z" class="post-list__meta--date date">2017-06-27</time> &#8226; <span class="post-meta__tags tags">于&nbsp; </span>
+      <span class="page-pv">
+      &nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">ubuntu16.04配置深度学习环境</h1>
+  </header>
+
+  <section class="post">
+    <p>最近在实验室配置了几个深度学习的服务器，在此记录下配置过程，以祭奠踩过的无数的坑。</p>
+<h3 id="环境列表"><a href="#环境列表" class="headerlink" title="环境列表"></a>环境列表</h3><ul>
+<li>Ubuntu 16.04 (64-bit)</li>
+<li>NVIDIA Taitan X</li>
+<li>Matlab2014b</li>
+<li>Python2.7 and Python3.5</li>
+<li>CUDA 8.0</li>
+<li>cuDNN 5.1</li>
+<li>opencv 3.1.0</li>
+<li>caffe</li>
+<li>caffe2</li>
+<li>Theano</li>
+<li>Keras</li>
+<li>Tensorflow</li>
+<li>Pytorch</li>
+<li>jupyter notebook</li>
+</ul>
+<h3 id="Ubuntu系统安装"><a href="#Ubuntu系统安装" class="headerlink" title="Ubuntu系统安装"></a>Ubuntu系统安装</h3><ul>
+<li>选择了Ubuntu 16.04版本，这个一个提供５年长期支持的版本</li>
+<li>目前的主板都支持UEFI 模式安装，所以在安装分区时，要有一个EFI分区(500M即可)，引导文件将安装在这个分区中，最终的引导盘也要选择这个分区所在的盘符。不同于之前的Legacy模式中的<code>/boot</code>分区</li>
+<li>安装系统前，先进入BIOS将<code>secure boot</code>关闭。因为如果开启了安全模式的话，很多第三方软件没法安装，尤其是安装显卡驱动时，会导致安装失败。</li>
+</ul>
+<h3 id="更换软件源"><a href="#更换软件源" class="headerlink" title="更换软件源"></a>更换软件源</h3><ul>
+<li>在系统设置中找到 软件和更新</li>
+<li>在 Ubuntu软件栏目，找到“下载自”下拉菜单</li>
+<li>其他站点-&gt;选择最佳服务器，选择离自己近的服务器就行了，我选择的是清华的服务器，下载速度快了十几倍。</li>
+</ul>
+<h3 id="Ubuntu系统基础命令"><a href="#Ubuntu系统基础命令" class="headerlink" title="Ubuntu系统基础命令"></a>Ubuntu系统基础命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update  # 更新软件包列表</span><br><span class="line">sudo apt-get upgrade # 升级软件包</span><br><span class="line">sudo apt-get install build-essential # 安装该软件包之后，编译c/c++所需要的软件包都会被安装。 包括  libc6-dev, gcc,g++,make, dpkg-dev</span><br><span class="line">sudo apt-get install cmake</span><br><span class="line">sudo apt-get install gfortran  # </span><br><span class="line">sudo apt-get install git</span><br><span class="line">sudo apt-get install pkg-config # 当从源代码编译软件时，用来提供依赖库的信息的软件</span><br><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo apt-get install wget # 一个可以空网络上自动下载文件的自由工具</span><br><span class="line">sudo apt-get autoclean # 将已经删除了的软件包的.deb安装文件从硬盘中删除掉</span><br><span class="line">sudo apt-get clean　# 把已安装的软件包的.deb安装包也删除掉</span><br><span class="line">sudo apt-get autoremove　# 删除为了满足其他软件包的依赖而安装的，但现在不需要的软件包</span><br><span class="line">sudo apt-get remove ＃删除已安装的软件包，保留配置文件</span><br><span class="line">sudo apt-get --purge remove #　删除已安装的包，不保留配置文件</span><br><span class="line">sudo rm -rf /var/lib/apt/lists/* # 删除apt-get install 的所有软件状态包</span><br></pre></td></tr></table></figure>
+<h3 id="Nvidia-驱动安装"><a href="#Nvidia-驱动安装" class="headerlink" title="Nvidia 驱动安装"></a>Nvidia 驱动安装</h3><ul>
+<li><p>查看显卡模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -i nvidia</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看显卡驱动是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/driver/nvidia/version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式一：在 <a href="http://www.geforce.com/drivers" target="_blank" rel="noopener">Nvidia 官网</a> 搜索合适的驱动，下载并安装。文件类型为<code>.run</code>。（不建议使用此方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+Alt+F1  # 进入字符界面，输入用户名和密码登录</span><br><span class="line">sudo service lightdm stop</span><br><span class="line">sudo sh XXX.run</span><br><span class="line">sudo service lightdm start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式二：使用apt-get 来安装驱动。在<a href="https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa" target="_blank" rel="noopener">“Proprietary GPU Drivers” PPA</a> 可以找到驱动的相关信息。该网站上有推荐安装的版本。（不建议使用此方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nvidia-375</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式三：直接安装CUDA，CUDA会自动安装相应的显卡驱动。</p>
+</li>
+</ul>
+<h3 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h3><ul>
+<li><p>在<a href="https://developer.nvidia.com/cuda-toolkit" target="_blank" rel="noopener">Nvidia官网</a> 下载CUDA 8 并安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># .deb格式的文件将显卡驱动和cuda工具包都一起安装了</span><br><span class="line">sudo dpkg -i cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install cuda</span><br><span class="line"># .run格式的文件，安装时有一个人机交互的界面，可以选择是否安装显卡驱动，CUDA安装路径等。适合于先安装特殊需求的驱动，然后单独安装CUDA工具包</span><br><span class="line">sudo sh cuda_8.0.61_375.26_linux.run</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将 CUDA 添加至环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PATH=/usr/local/cuda/bin:$PATH&apos; &gt;&gt; ~/.bashrc</span><br><span class="line">echo &apos;export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH&apos; &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确认是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启计算机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo shutdown -r now</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改gcc版本<br>目前ubuntu16.04自带gcc是5.4版本，但是CUDA8.0不支持５以上的版本。有人把系统中的gcc降级了，其实没必要这么做，甚至有可能对其他库的安装有影响。这里直接修改<code>host_config.h</code>文件，把<code>if __GNUC__&gt;5</code>改成<code>if __GNUC__&gt;6</code>即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda-8.0/include</span><br><span class="line">sudo cp host_config.h host_config.h.bak</span><br><span class="line">sudo gedit host_config.h</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="进行测试"><a href="#进行测试" class="headerlink" title="进行测试"></a>进行测试</h4><ul>
+<li><p>安装CUDA测试样例，进行编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/cuda/bin/cuda-install-samples-8.0.sh ~/cuda-samples # 复制样例文件夹到根目录下</span><br><span class="line">cd ~/cuda-samples/NVIDIA*Samples</span><br><span class="line">make -j $(($(nproc) + 1)) # (-j $(($(nproc) + 1))) 表示进行并行编译，并行参数取决于CPU内核的个数</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 deviceQuery，确保检测到了显卡并通过了测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/x86_64/linux/release/deviceQuery</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="cuDNN"><a href="#cuDNN" class="headerlink" title="cuDNN"></a>cuDNN</h3><ul>
+<li>NVIDIA CUDA Deep Neural Network library(cuDNN)是深度神经网络中GPU加速相关的库，实现了很多基本的结构，如前传后传，卷积层，pooling 层，归一化，激活函数等。首先，需要在<a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">https://developer.nvidia.com/cudnn</a> 注册并下载。这里选择下载<strong>cuDNN v5.1 library for Linux</strong></li>
+<li>解压缩并复制文件到相应位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar xvf cudnn*.tgz  </span><br><span class="line">cd cuda/include   # 这里文件下载到了根目录下，需按照自身情况选择目录</span><br><span class="line">sudo cp cudnn.h /usr/local/cuda/include/</span><br><span class="line">cd ~/cuda/lib64</span><br><span class="line">sudo cp lib* /usr/local/cuda/lib64/</span><br><span class="line">cd /usr/local/cuda/lib64/</span><br><span class="line">sudo rm -rf libcudnn.so libcudnn.so.5 # 删除原有动态文件</span><br><span class="line">sudo ln -s libcudnn.so.5.0.5 libcudnn.so.5 # 生成软链接</span><br><span class="line">sudo ln -s libcudnn.so.5 libcudnn.so # 生成软链接</span><br><span class="line">sudo ldconfig #更新链接，不然编译caffe会出现找不到cudnn的文件路径错误！</span><br><span class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn* # 将文件设置为所有人皆可读取</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="GPU相关验证"><a href="#GPU相关验证" class="headerlink" title="GPU相关验证"></a>GPU相关验证</h3><ul>
+<li>到目前位置，跟GPU相关的东西都安装好了，使用指令<code>nvidia-smi</code>，可查看GPU当前状态。或者通过指令<code>nvidia-settings</code>查看GPU的详细信息</li>
+</ul>
+<h3 id="MATLAB"><a href="#MATLAB" class="headerlink" title="MATLAB"></a>MATLAB</h3><ul>
+<li>下载matlab iso镜像，这里是MATLAB2014b</li>
+<li>打开终端，输入<code>sudo mkdir /mnt/temp</code>（建立临时文件夹存放加载后的iso文件）</li>
+<li>输入<code>sudo mount -o loop /path/to/matlab.iso /mnt/temp</code></li>
+<li>创建安装matlab的文件夹 <code>sudo mkdir /usr/local/matlab</code></li>
+<li>开始安装 <code>sudo /mnt/temp/install</code>选择不联网安装，序列号在<code>/mnt/temp/crack</code>文件夹下的<code>FIK 2014b.txt</code>文件里。安装路径选择为<code>/usr/local/matlab</code></li>
+<li>选择安装 <code>license manager</code>， 否则安装好以后无法激活</li>
+<li>选择不联网激活，选择<code>/mnt/temp/crack</code>文件夹下的<code>license.lic</code>文件</li>
+<li>将Crack 文件夹下的<code>libmwservices.so</code>文件拷贝到<code>/usr/local/matlab/bin/glnxa64</code>目录下</li>
+<li><p>将matlab路径添加至环境变量，之后启动MATLAB只需要从终端输入<code>matlab</code>即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line"># 在最后一行添加</span><br><span class="line">export PATH=&quot;/usr/local/matlab/bin:$PATH&quot;</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Note:</strong> 打开matlab时会告知程序崩溃，强制退出，引起这种错误的原因是ubuntu15.04及以上版本包含更新版本的libstdc++.so.6，而matlab使用的是较旧版本(version 6.0.17)。当matlab首先加载 <code>/usr/local/matalb/sys/os/glnxa64</code>中的libstdc++.so.6.0.17时，操作系统收到一个matlab引起的不兼容错误，从而引发启动崩溃。这个bug已在R2016b中修复。<br>解决方案：<br>可以强制使matlab加载由操作系统提供的更新版的libstdc++库，通过以下步骤完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/matlab/sys/os/glnxa64</span><br><span class="line">sudo mv libstdc++.so.6 libstdc++.so.6.bak</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><ul>
+<li>Ubuntu16.04 默认安装了Python2.7和Python3.5, 两个版本可同时存在，默认使用Python2.7。因为Ubuntu底层很多功能用到了Python2.7,所以不能将其删除。</li>
+<li>切换版本：可通过直接输入<code>python2.7</code>和<code>python3.5</code>来切换版本。因为<code>/usr/bin</code>中 <code>python</code>是一个快捷方式，其默认指向<code>python2.7</code>。</li>
+<li>在sublime Text3 中默认有python2的编译器，可多设置一个python3的编译器，使用时灵活切换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Tools-&gt;Build system-&gt;New build System, 新建一个sublime-build文件</span><br><span class="line"># 在打开的文件中填写如下内容，填写想要的python编译器的路径</span><br><span class="line">&#123;</span><br><span class="line"> &quot;cmd&quot;: [&quot;/usr/bin/python3&quot;, &quot;-u&quot;, &quot;$file&quot;],</span><br><span class="line"> &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,</span><br><span class="line"> &quot;selector&quot;: &quot;source.python&quot; </span><br><span class="line"> &#125;</span><br><span class="line"> # 保存文件名为 python3.sublime-build. 运行Python文件时，sublime会调用Python3的编译器</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="pip-install-与-apt-get-install"><a href="#pip-install-与-apt-get-install" class="headerlink" title="pip install 与 apt-get install"></a>pip install 与 apt-get install</h4><ul>
+<li><p>pip是Python的包管理工具，主要用于安装PyPI上的软件包，可以替代easy_install工具。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-pip # 安装pip</span><br><span class="line">sudo apt-get install python3-pip #安装pip3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>/usr/bin</code>中有 <code>pip,pip2,pip3</code>，使用<code>pip2</code>为python2.7 安装包，用<code>pip3</code>为python3.5安装包，至于使用<code>pip</code>为那个版本的python安装，要看<code>pip</code>指向的是<code>pip2</code>还是<code>pip3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip --version</span><br><span class="line">&gt;&gt;&gt; pip 9.0.1 from /usr/local/lib/python3.5/dist-packages (python 3.5)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pip install 的源是 pyPI, apt-get 的源是ubuntu 仓库。对于python 来说，pyPI 的源要比Ubuntu的多，对于同一个包，pyPI可提供多版本指定下载，apt-get install安装的是最新的系统化的包，在系统内完全安装。对apt-get install 来说，包的名称可能是<code>python-&lt;packgeName&gt;</code>,<code>python3-&lt;packgeName&gt;</code>；对于pip来说，直接使用<code>&lt;packgeName&gt;</code>来安装即可，至于为Python2还是Python3安装，要看pip的具体版本。</p>
+</li>
+</ul>
+<h3 id="OpenBLAS"><a href="#OpenBLAS" class="headerlink" title="OpenBLAS"></a>OpenBLAS</h3><ul>
+<li><p>OpenBLAS 是一个线性代数库，可选择安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/xianyi/OpenBLAS.git</span><br><span class="line">cd OpenBLAS</span><br><span class="line">make FC=gfortran -j $(($(nproc)+1))</span><br><span class="line">sudo make PREFIX=/usr/local install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH&apos; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Python包安装"><a href="#Python包安装" class="headerlink" title="Python包安装"></a>Python包安装</h3><ul>
+<li>后面安装的深度学习框架都有Python接口，在安装它们之前，需安装好各种依赖项，以及我们可能会用到的Python包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y --no-install-recommends build-essential python-dev libgoogle-glog-dev libprotobuf-dev protobuf-compiler  </span><br><span class="line">sudo apt-get install -y --no-install-recommends libgflags-dev # ubuntu 16.04 安装caffe2需要</span><br><span class="line">sudo pip install -U --pre pip setuptools wheel</span><br><span class="line">sudo pip install -U --pre numpy scipy matplotlib scikit-learn scikit-image protobuf nose ipython h5py sympy pygments sphinx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h3><ul>
+<li><p>选取GPU支持版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install tensorflow-gpu</span><br><span class="line">sudo pip3 install tensorflow-gpu # 为Python3 安装</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试<br>在终端进性测试，如果安装无误，便不会出现任何警告或错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt; exit()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Theano"><a href="#Theano" class="headerlink" title="Theano"></a>Theano</h3><ul>
+<li><p>安装运算加速库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y libopenblas-dev liblapack-dev libatlas-base-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用pip安装Theano。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -U --pre  theano</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置theano文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.theanorc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>GPU 加速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># GPU 加速</span><br><span class="line">[global]</span><br><span class="line">openmp=False</span><br><span class="line">device=gpu</span><br><span class="line">floatX=float32</span><br><span class="line">allow_input_downcast=True</span><br><span class="line">[lib]</span><br><span class="line">cnmem=0.8</span><br><span class="line">[root]</span><br><span class="line">root=/usr/local/cuda-8.0</span><br><span class="line">[blas]</span><br><span class="line">ldflags=-lopenblas</span><br><span class="line">[nvcc]</span><br><span class="line">fastmath=True</span><br><span class="line">[cuda]</span><br><span class="line">root=/usr/local/cuda-8.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CPU加速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">openmp=True</span><br><span class="line">device=cpu</span><br><span class="line">floatX=float32</span><br><span class="line">allow_input_downcast=True</span><br><span class="line">[blas]</span><br><span class="line">ldflags=-lopenblas</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Python中测试是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">&gt;&gt;&gt; import theano</span><br><span class="line">&gt;&gt;&gt; exit()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Keras"><a href="#Keras" class="headerlink" title="Keras"></a>Keras</h3><ul>
+<li><p>Keras 是Theano 和 Tensorflow 的封装，代码简单，可作为黑盒使用，方便学习和快速搭建网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -U --pre keras</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改默认keras后端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.keras/keras.json</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在python中验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;import keras</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Opencv-3-1"><a href="#Opencv-3-1" class="headerlink" title="Opencv 3.1"></a>Opencv 3.1</h3><ul>
+<li><p>在git上下载opencv 和 opencv-contrib，这样以后有什么更新直接同步，而不用重新去官网下载。下载完后注意检出3.1.0分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">git clone https://github.com/opencv/opencv.git</span><br><span class="line">cd opencv</span><br><span class="line">git checkout 3.1.0</span><br><span class="line">cd ~</span><br><span class="line">git clone https://github.com/opencv/opencv_contrib.git</span><br><span class="line">cd opencv_contrib</span><br><span class="line">git checkout 3.1.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CMake Opencv 源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cd ~/opencv</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE\</span><br><span class="line">-D CMAKE_INSTALL_PREFIX=/usr/local\</span><br><span class="line">-D WITH_TBB=ON\</span><br><span class="line">-D WITH_V4L=ON\</span><br><span class="line">-D WITH_QT=ON\</span><br><span class="line">-D WITH_OPENGL=ON\</span><br><span class="line">-D INSTALL_PYTHON_EXAMPLES=ON\</span><br><span class="line">-D BUILD_EXAMPLES=ON\</span><br><span class="line">-D INSTALL_C_EXAMPLES=ON\</span><br><span class="line">-D CUDA_NVCC_FLAGS=&quot;-D_FORCE_INLINES&quot;\</span><br><span class="line">-D BUILD_NEW_PYTHON_SUPPORT=ON\</span><br><span class="line">-D OPENCV_EXTRA_MODULES_PATH=~/Github/opencv_contrib/modules .. # 这是opencv_contrib的支持文件路径</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j $(($(nproc) + 1))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br><span class="line">sudo /bin/bash -c &apos;echo &quot;/usr/local/lib&quot; &gt; /etc/ld.so.conf.d/opencv.conf&apos;</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Note：</strong> opencv3.1.0 与CUDA8.0不兼容，会导致错误<code>modules/cudalegacy/src/graphcuts.cpp:120:54: error: 
+‘NppiGraphcutState’ has not been declared</code>。解决办法：修改～/opencv/modules/cudalegacy/src/graphcuts.cpp文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//# if !defined(HAVE_CUDA) || difined(CUDA_DISABLER)</span><br><span class="line"># if !defined(HAVE_CUDA) || defined(CUDA_DISABLER) || (CUDA_VERSION&gt;=8000)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Note:</strong> 编译中间会有一个ICV的文件下载的很慢，或者会校验错误。在网上下载相应的文件，拷贝到<code>～/opencv/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e</code>目录下即可</p>
+</li>
+</ul>
+<h3 id="Caffe（Python2-7版本）"><a href="#Caffe（Python2-7版本）" class="headerlink" title="Caffe（Python2.7版本）"></a>Caffe（Python2.7版本）</h3><ul>
+<li><p>安装之前需要先安装一些依赖项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libfreetype6-dev  libpng12-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler  libboost-all-dev libgflags-dev libgoogle-glog-dev liblmdb-dev g++</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从github克隆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/BVLC/caffe.git</span><br><span class="line">cd caffe</span><br><span class="line">cp Makefile.config.example Makefile.config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改Makefile.config文件<code>gksu gedit Makefile.config</code></p>
+<ul>
+<li><strong><code>USE_CUDNN := 1</code></strong>  使用cudnn</li>
+<li><strong><code>OPENCV_VERSION := 3</code></strong> 使用opencv3.1.0版本</li>
+<li><strong><code>CUDA_DIR := /usr/local/cuda</code></strong> CUDA路径</li>
+<li><strong><code>BLAS := open</code></strong> 使用openBLAS版本</li>
+<li><strong><code>BLAS_INCLUDE := /usr/local/include</code></strong> BLAS路径</li>
+<li><strong><code>BLAS_LIB := usr/local/lib</code></strong></li>
+<li><strong><code>MATLAB_DIR := /usr/local/matlab</code></strong> matlab 路径</li>
+<li><strong><code>PYTHON_INCLUDE := /usr/include/python2.7 \</code><br>  <code>/usr/lib/python2.7/dist-packages/numpy/core/include</code></strong> </li>
+<li><strong><code>PYTHON_LIB := /usr/lib</code></strong></li>
+<li><strong><code>WITH_PYTHON_LAYER := 1</code></strong></li>
+<li><strong><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/</code></strong></li>
+<li><strong><code>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial/</code></strong></li>
+<li><strong><code>USE_PKG_CONFIG := 1</code></strong></li>
+<li><strong><code>BUILD_DIR := build</code></strong></li>
+<li><strong><code>DISTRIBUTE_DIR := distribute</code></strong></li>
+<li><strong><code>TEST_GPUID := 0</code></strong></li>
+<li><strong><code>Q ?= @</code></strong></li>
+</ul>
+</li>
+<li><p>安装需要的包，编译源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pip2 install -r python/requirements.txt</span><br><span class="line">make all -j8</span><br><span class="line">make test -j8</span><br><span class="line">make runtest -j8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译pycaffe，作为caffe的Python接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pycaffe -j8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把caffe中和python 相关的内容的路劲刚添加到python的编译路径中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo `export PYTHONPATH=(path/to/caffe)/python:$PYTHONPATH` &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="编译caffe时可能出现的问题"><a href="#编译caffe时可能出现的问题" class="headerlink" title="编译caffe时可能出现的问题"></a>编译caffe时可能出现的问题</h4><ul>
+<li>为hdf5相关文件创建新的链接<br>  找到<code>libhdf_serial.so.10.1.0</code>所在的文件夹，建立两个链接<code>sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so</code>和 <code>sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so</code></li>
+<li>找不到 hdf5.h , hdf5_hl.h<br>  使用命令<code>sudo find /-name hdf5.h</code>和<code>sudo find / -name hdf5_hl.h</code>找到相应路径之后，把路径加到Makefile.config中。在”INCLUDE_DIRS”中添加<code>/usr/include/hdf5/serial/</code></li>
+<li>找不到libhdf5.so<br>  使用命令<code>sudo find / -name libhdf5.so</code>，找到路径后，为Makefile.config 中的”LIBRARY_DIRS”添加<code>/usr/lib/x86_64-linux-gnu/hdf5/serial/</code></li>
+<li><p>由于gcc版本太新导致的问题：在Makefile中搜索并替换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NVCCFLAGS += -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS) </span><br><span class="line"></span><br><span class="line">NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>usr/bin/ld: 找不到 -lippicv<br>  在opencv 中找到libippicv.a文件，将其复制到<code>/usr/local/lib</code>目录下</p>
+</li>
+<li>在Python中验证<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">&gt;&gt;&gt; import caffe</span><br><span class="line">&gt;&gt;&gt; exit()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Caffe2（Python2-7版本）"><a href="#Caffe2（Python2-7版本）" class="headerlink" title="Caffe2（Python2.7版本）"></a>Caffe2（Python2.7版本）</h3><ul>
+<li><p>Clone &amp; Build</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https://github.com/caffe2/caffe2.git</span><br><span class="line">cd caffe2</span><br><span class="line">make</span><br><span class="line">cd build</span><br><span class="line">sudo make install</span><br><span class="line">python -c &apos;from caffe2.python import core&apos; 2&gt;/dev/null &amp;&amp; echo &quot;Success&quot; || echo &quot;Failure&quot;</span><br><span class="line">python -m caffe2.python.operator_test.relu_op_test</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置环境变量 ~/.bashrc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PYTHONPATH=/usr/local:$PYTHONPATH</span><br><span class="line">export PYTHONPATH=$PYTHONPATH:/home/usrname/caffe2/build</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h3><ul>
+<li>在<a href="http://pytorch.org/" target="_blank" rel="noopener">Pytorch官网</a> 中选择相应的系统，安装方式，Python版本，CUDA版本后，会给出两行代码，将其复制到命令行直接就可安装Pytorch。我安装时的代码如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp27-none-linux_x86_64.whl </span><br><span class="line">pip install torchvision</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Jupyter-notebook"><a href="#Jupyter-notebook" class="headerlink" title="Jupyter notebook"></a>Jupyter notebook</h3><p>Jupyter notebook 的前身是Ipython notebook，安装好后在浏览器运行，可以在一个界面内编写代码，调试代码，添加笔记。如果将其安装在服务器端，可在客户机上通过浏览器访问。</p>
+<ul>
+<li><p>在Ubuntu上安装Jupyter notebook</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter notebook</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在~/.bashrc 中添加路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:~/.local/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动Jupyter notebook</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Jupyter-notebook-远程服务器配置"><a href="#Jupyter-notebook-远程服务器配置" class="headerlink" title="Jupyter notebook 远程服务器配置"></a>Jupyter notebook 远程服务器配置</h4><ul>
+<li><p>生成密码，打开python 终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from IPython.lib import passwd</span><br><span class="line">passwd()</span><br><span class="line">&gt;&gt;&gt; Enter password:</span><br><span class="line">&gt;&gt;&gt; Verify password:</span><br><span class="line">&gt;&gt;&gt; &apos;sha1:0e422dfccef2:84cfbcb </span><br><span class="line">b3ef95872fb8e23be3999c123f862d856&apos; # 将此密码复制下来</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑文件<code>jupyter_notebook_config.py</code>，在<code>~./jupyter/</code>文件夹中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip =&apos;*&apos;</span><br><span class="line">c.NotebookApp.password = u&apos; 上面复制的密码&apos;</span><br><span class="line">c.NotebookApp.port = 9999 # 这里填写端口号</span><br><span class="line">c.InteractiveShellApp.matplotlib = &apos;inline&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果没有~/.jupyter文件夹，终端输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在服务器端运行jupyter notebook之后，在其他电脑的浏览器上输入服务器的IP地址和端口号（e.g., 102.168.0.23:9999），然后输入密码即可使用。如果在服务器端运行，输入<code>localhost:9999</code></p>
+</li>
+<li><p>可设置jupyter notebook 在后台不间断运行（可选）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter notebook &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看jupyter内核空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter-kernelspec list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为jupyter添加Python3内核</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install ipykernel</span><br><span class="line">sudo python3 -m ipykernel install --name python3 --display-name &quot;Python3.5.2&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">最近的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/06/27/金刚经-法会因由分/" title="金刚经-法会因由分">金刚经-法会因由分</a></h2>
+                <p class="excerpt">
+                
+                
+如是我闻。一时佛在舍卫国。祇树给孤独园。与大比丘众。千二百五十人俱。尔时世尊。食时。著衣持钵。入舍卫大城乞食。于其城中。次第乞已。还至本处。饭食讫。收衣钵。洗足已。敷座而坐。
+
+《金刚经》的开头讲了一个故事。这个故事不是如来佛坐在高高的莲花座上，下面坐着一众大小佛，菩萨罗汉，大殿里香烟缭绕，诵经声
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-06-27T22:08:51.000Z" class="post-list__meta--date date">2017-06-27</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/金刚经/">金刚经</a>
+</span><a class="btn-border-small" href="/2017/06/27/金刚经-法会因由分/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/06/14/金刚经-缘起/" title="金刚经-缘起">金刚经-缘起</a></h2>
+                <p class="excerpt">
+                
+                我最近一直在读《金刚经》，当有人无意间知晓这件事时，总会露出一脸惊讶的表情：“卧槽，你是要看破红尘了么？”  
+大概是影视作品的影响太过强大，让人们对佛一直有着一种偏颇的理解，从而敬而远之吧。 和尚，十八般武艺，不近女色，吃斋念佛，西天取经，武林高手，看破红尘，不是人间烟火······以前我对佛也免
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-06-14T23:30:43.000Z" class="post-list__meta--date date">2017-06-14</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/金刚经/">金刚经</a>
+</span><a class="btn-border-small" href="/2017/06/14/金刚经-缘起/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2017 - 本站使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题,
+        由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+    </span>
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?20398798e21b5b356533c5ed935ed80e";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
